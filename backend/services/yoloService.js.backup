@@ -5,7 +5,7 @@ const path = require('path');
 // YOLO service to process images with the trained model
 class YOLOService {
   constructor() {
-    this.pythonServiceUrl = process.env.YOLO_SERVICE_URL || process.env.PYTHON_SERVICE_URL || 'http://localhost:8000';
+    this.pythonServiceUrl = process.env.PYTHON_SERVICE_URL || 'http://localhost:8000';
   }
 
   async processImageWithYOLO(imagePath) {

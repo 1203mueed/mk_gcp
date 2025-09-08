@@ -42,11 +42,8 @@ function Footer() {
               <img 
                 src="/logo.png" 
                 alt="ময়লা কোথAI Logo" 
-                style={{ height: '40px', marginRight: '10px', filter: 'brightness(0) invert(1)' }} 
+                style={{ height: '60px', filter: 'brightness(0) invert(1)' }} 
               />
-              <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                ময়লা কোথAI
-              </Typography>
             </Box>
             <Typography variant="body2" sx={{ mb: 2, opacity: 0.8 }}>
               Smart waste management for modern cities, powered by AI and citizen engagement.
@@ -63,55 +60,55 @@ function Footer() {
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
               <Link 
                 to="/" 
-                component={Typography} 
-                sx={{ 
+                style={{ 
                   color: 'white', 
                   textDecoration: 'none', 
-                  opacity: 0.8, 
-                  '&:hover': { opacity: 1 },
+                  opacity: 0.8,
                   transition: 'opacity 0.2s ease-in-out'
                 }}
+                onMouseEnter={(e) => e.target.style.opacity = '1'}
+                onMouseLeave={(e) => e.target.style.opacity = '0.8'}
               >
-                Home
+                <Typography component="span">Home</Typography>
               </Link>
               <Link 
                 to="/about-us" 
-                component={Typography} 
-                sx={{ 
+                style={{ 
                   color: 'white', 
                   textDecoration: 'none', 
-                  opacity: 0.8, 
-                  '&:hover': { opacity: 1 },
+                  opacity: 0.8,
                   transition: 'opacity 0.2s ease-in-out'
                 }}
+                onMouseEnter={(e) => e.target.style.opacity = '1'}
+                onMouseLeave={(e) => e.target.style.opacity = '0.8'}
               >
-                About Us
+                <Typography component="span">About Us</Typography>
               </Link>
               <Link 
                 to="/why-our-solution" 
-                component={Typography} 
-                sx={{ 
+                style={{ 
                   color: 'white', 
                   textDecoration: 'none', 
-                  opacity: 0.8, 
-                  '&:hover': { opacity: 1 },
+                  opacity: 0.8,
                   transition: 'opacity 0.2s ease-in-out'
                 }}
+                onMouseEnter={(e) => e.target.style.opacity = '1'}
+                onMouseLeave={(e) => e.target.style.opacity = '0.8'}
               >
-                Why Our Solution
+                <Typography component="span">Why Our Solution</Typography>
               </Link>
               <Link 
                 to="/heatmap" 
-                component={Typography} 
-                sx={{ 
+                style={{ 
                   color: 'white', 
                   textDecoration: 'none', 
-                  opacity: 0.8, 
-                  '&:hover': { opacity: 1 },
+                  opacity: 0.8,
                   transition: 'opacity 0.2s ease-in-out'
                 }}
+                onMouseEnter={(e) => e.target.style.opacity = '1'}
+                onMouseLeave={(e) => e.target.style.opacity = '0.8'}
               >
-                Live Heatmap
+                <Typography component="span">Live Heatmap</Typography>
               </Link>
             </Box>
           </Grid>
@@ -124,7 +121,7 @@ function Footer() {
               Email: info@moylakothai.com
             </Typography>
             <Typography variant="body2" sx={{ mb: 1, opacity: 0.8 }}>
-              Phone: +880 123 456 7890
+              Phone: +880 168 324 3077
             </Typography>
             <Typography variant="body2" sx={{ opacity: 0.8 }}>
               Address: Dhaka, Bangladesh

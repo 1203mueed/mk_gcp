@@ -1,19 +1,19 @@
--- PostgreSQL Database Setup for Moyla KothAI
+-- PostgreSQL Database Setup for Waste Patrol
 -- Run this script to set up the database with the correct password
 
 -- Connect to PostgreSQL as superuser and run these commands:
 
 -- Create the database
-CREATE DATABASE moyla_kothai;
+CREATE DATABASE waste_patrol;
 
--- Set the moyla_user password
-ALTER USER moyla_user PASSWORD 'moyla_secure_password';
+-- Set the postgres user password
+ALTER USER postgres PASSWORD 'waste_patrol';
 
--- Grant all privileges on the database to moyla_user
-GRANT ALL PRIVILEGES ON DATABASE moyla_kothai TO moyla_user;
+-- Grant all privileges on the database to postgres user
+GRANT ALL PRIVILEGES ON DATABASE waste_patrol TO postgres;
 
--- Connect to the moyla_kothai database
-\c moyla_kothai;
+-- Connect to the waste_patrol database
+\c waste_patrol;
 
 -- Enable UUID extension (needed for Sequelize UUID primary keys)
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

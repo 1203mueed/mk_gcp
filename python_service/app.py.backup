@@ -81,7 +81,7 @@ def process_image_yolov8(input_path, output_folder, image_id):
             print("⚠️ No masks found in YOLO results")
         
         # Create annotated image - EXACTLY like old server
-        print("�� Creating annotated image...")
+        print("🎨 Creating annotated image...")
         annotated_image = res.plot()
         
         # Save processed image - EXACTLY like old server
@@ -247,9 +247,6 @@ if __name__ == '__main__':
     else:
         print("❌ YOLO model failed to load")
     
-    # Get port from environment variable
-    port = int(os.environ.get('PORT', 8080))
-    print(f"🌐 Starting server on port {port}")
-    
     # Disable debug mode and auto-reload to prevent interruptions during YOLO processing
+    port = int(os.environ.get('PORT', 8080 if os.environ.get('NODE_ENV') == 'production' else 8000))
     app.run(host='0.0.0.0', port=port, debug=False, use_reloader=False)

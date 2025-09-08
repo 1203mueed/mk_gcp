@@ -66,14 +66,14 @@ function Login() {
         >
           <img
             src="/logo.png"
-            alt="Waste Patrol"
+            alt="Moyla KothAi"
             style={{ height: 60, marginBottom: 16 }}
           />
           <Typography component="h1" variant="h4" sx={{ mb: 1, fontWeight: 600 }}>
             Welcome Back
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-            Sign in to your Waste Patrol account
+            Sign in to your Moyla KothAi account
           </Typography>
 
           {error && (

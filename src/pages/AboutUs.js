@@ -43,6 +43,11 @@ function AboutUs() {
       title: "Data Analytics",
       description: "Authorities receive detailed reports with AI-processed information to make informed decisions.",
       icon: <BarChart sx={{ fontSize: 40 }} />
+    },
+    {
+      title: "Authority Action",
+      description: "Authorities are responsible and accountable for addressing reported waste issues and maintaining transparency throughout the process.",
+      icon: <CheckCircle sx={{ fontSize: 40 }} />
     }
   ];
 
@@ -155,8 +160,8 @@ function AboutUs() {
             powered by advanced AI technology.
           </Typography>
 
-          <Grid container spacing={4}>
-            {features.map((feature, index) => (
+          <Grid container spacing={4} justifyContent="center">
+            {features.slice(0, 4).map((feature, index) => (
               <Grid item xs={12} sm={6} md={3} key={index}>
                 <Card
                   sx={{
@@ -190,6 +195,41 @@ function AboutUs() {
               </Grid>
             ))}
           </Grid>
+          
+          {/* Authority Action Card - Centered */}
+           <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+             <Grid item xs={12} sm={6} md={3}>
+               <Card
+                 sx={{
+                   height: '100%',
+                   display: 'flex',
+                   flexDirection: 'column',
+                   transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
+                   '&:hover': {
+                     transform: 'translateY(-4px)',
+                     boxShadow: theme.shadows[8]
+                   }
+                 }}
+               >
+                 <CardContent sx={{ flexGrow: 1, textAlign: 'center', p: 3 }}>
+                   <Box
+                     sx={{
+                       color: '#48bc19',
+                       mb: 2
+                     }}
+                   >
+                     {features[4].icon}
+                   </Box>
+                   <Typography variant="h6" component="h3" gutterBottom sx={{ fontWeight: 600 }}>
+                     {features[4].title}
+                   </Typography>
+                   <Typography variant="body2" color="text.secondary" paragraph>
+                     {features[4].description}
+                   </Typography>
+                 </CardContent>
+               </Card>
+             </Grid>
+           </Box>
         </Container>
       </Box>
 
@@ -482,10 +522,11 @@ function AboutUs() {
           paragraph
           sx={{ mb: 4, maxWidth: '600px', mx: 'auto' }}
         >
-          Moyla KothAI is proudly developed by Triliant Data, a leading provider of AI-powered 
-          solutions for smart cities and environmental management. Our team combines expertise 
-          in artificial intelligence, computer vision, and urban planning to create innovative 
-          solutions for today's challenges.
+          Triliant Data was born in Dhaka in 2024 to make world-class technology accessible to every business.
+          We tackle problems with curiosity, creativity, and innovation, providing cutting-edge computer vision and AI solutions.
+          We combine local insight with global ambition to build innovative software that leads.
+          Our solutions go beyond technology, built on trust, reliability, and accountability,
+          putting people, vision, and potential at the heart of progress.
         </Typography>
         
         <Button

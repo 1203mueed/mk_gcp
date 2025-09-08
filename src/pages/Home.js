@@ -8,7 +8,6 @@ import {
   Card,
   alpha,
   Chip,
-  Avatar,
   Fade,
 } from '@mui/material';
 import Iridescence from '../ui/Iridescence';
@@ -19,7 +18,6 @@ import {
   Map,
   ArrowForward,
   PlayArrow,
-  Star,
   People,
   SmartToy,
 } from '@mui/icons-material';
@@ -79,30 +77,15 @@ function Home() {
       image: '/assets/images/org_image_vs_processed_img.png',
       color: '#9c27b0',
       stats: ['Computer Vision', 'Machine Learning', 'Continuous Improvement']
-    }
-  ];
-
-  const testimonials = [
-    {
-      name: "Dhaka City Corporation",
-      role: "Municipal Authority",
-      content: "ময়লা কোথAI has revolutionized our waste management operations. We've seen a 60% improvement in response times.",
-      rating: 5,
-      avatar: "DC"
     },
     {
-      name: "Chittagong Port Authority",
-      role: "Port Management",
-      content: "The AI-powered detection system has helped us maintain cleaner port areas and improve environmental compliance.",
-      rating: 5,
-      avatar: "CP"
-    },
-    {
-      name: "Rajshahi City Corporation",
-      role: "Urban Development",
-      content: "Citizen engagement has increased by 300% since implementing ময়লা কোথAI. The platform is intuitive and effective.",
-      rating: 5,
-      avatar: "RC"
+      icon: <PlayArrow sx={{ fontSize: 60 }} />,
+      title: 'Real-Time API for Waste Monitoring',
+      subtitle: 'Live Data Integration',
+      description: 'A real-time API serves live waste image data, enabling integration with any device, including cameras mounted on vehicles or other monitoring equipment.',
+      image: '/assets/images/heatmap.png',
+      color: '#2196f3',
+      stats: ['Live Data', 'Device Integration', 'Vehicle Mounting']
     }
   ];
 
@@ -280,9 +263,7 @@ function Home() {
               <Box sx={{ display: 'flex', gap: 4, justifyContent: 'center', flexWrap: 'wrap' }}>
                 {[
                   { number: '95%+', label: 'AI Accuracy' },
-                  { number: '60%', label: 'Faster Response' },
-                  { number: '40%', label: 'Cost Reduction' },
-                  { number: '300%', label: 'Citizen Engagement' }
+                  { number: '60%', label: 'Faster Response' }
                 ].map((stat, index) => (
                   <Box key={index} sx={{ textAlign: 'center' }}>
                     <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.5, textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>
@@ -294,6 +275,56 @@ function Home() {
                   </Box>
                 ))}
               </Box>
+              
+              {/* Mobile App Coming Soon Text */}
+              <Box sx={{ mt: 5, mb: 2, textAlign: 'center' }}>
+                <Box
+                  sx={{
+                    display: 'inline-block',
+                    position: 'relative',
+                    padding: '5px',
+                    borderRadius: '35px',
+                    background: 'linear-gradient(45deg, #48bc19, #09418c, #48bc19)',
+                    backgroundSize: '200% 200%',
+                    animation: 'gradientBg 3s ease infinite',
+                    boxShadow: '0 8px 30px rgba(0,0,0,0.3), 0 0 20px rgba(72,188,25,0.5)',
+                  }}
+                >
+                  <Typography 
+                    variant="h4" 
+                    sx={{ 
+                      fontWeight: 900, 
+                      color: '#ffffff',
+                      letterSpacing: '0.05em',
+                      animation: 'pulse 2s infinite',
+                      display: 'inline-block',
+                      padding: '12px 25px',
+                      border: '4px solid #ffffff',
+                      borderRadius: '30px',
+                      backdropFilter: 'blur(10px)',
+                      backgroundColor: 'rgba(9,65,140,0.4)',
+                      fontSize: '2rem',
+                      position: 'relative',
+                      zIndex: 2,
+                      textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+                    }}
+                  >
+                    ✨ Mobile App Coming Soon! ✨
+                  </Typography>
+                </Box>
+              </Box>
+              
+              <style jsx>{`
+                @keyframes pulse {
+                  0%, 100% { opacity: 1; transform: scale(1); }
+                  50% { opacity: 0.95; transform: scale(1.05); }
+                }
+                @keyframes gradientBg {
+                  0% { background-position: 0% 50% }
+                  50% { background-position: 100% 50% }
+                  100% { background-position: 0% 50% }
+                }
+              `}</style>
             </Box>
           </Fade>
         </Container>
@@ -416,86 +447,7 @@ function Home() {
         </Grid>
       </Container>
 
-      {/* Testimonials Section */}
-      <Box
-        sx={{
-          backgroundColor: alpha('#09418c', 0.05),
-          py: { xs: 8, md: 12 }
-        }}
-      >
-        <Container maxWidth="lg">
-          <Typography
-            variant="h3"
-            component="h2"
-            textAlign="center"
-            gutterBottom
-            sx={{ fontWeight: 700, mb: 2, color: '#09418c' }}
-          >
-            Trusted by Municipal Authorities
-          </Typography>
-          <Typography
-            variant="h6"
-            textAlign="center"
-            color="text.secondary"
-            paragraph
-            sx={{ mb: 6, maxWidth: '600px', mx: 'auto' }}
-          >
-            Leading cities across Bangladesh are already experiencing the benefits 
-            of our AI-powered waste management solution.
-          </Typography>
 
-          <Grid container spacing={4}>
-            {testimonials.map((testimonial, index) => (
-              <Grid item xs={12} md={4} key={index}>
-                <Card
-                  sx={{
-                    height: '100%',
-                    p: 4,
-                    transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
-                    '&:hover': {
-                      transform: 'translateY(-8px)',
-                      boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
-                    }
-                  }}
-                >
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                    <Avatar
-                      sx={{
-                        bgcolor: '#09418c',
-                        width: 60,
-                        height: 60,
-                        mr: 2,
-                        fontSize: '1.5rem',
-                        fontWeight: 700
-                      }}
-                    >
-                      {testimonial.avatar}
-                    </Avatar>
-                    <Box>
-                      <Typography variant="h6" sx={{ fontWeight: 600, color: '#09418c' }}>
-                        {testimonial.name}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {testimonial.role}
-                      </Typography>
-                    </Box>
-                  </Box>
-                  
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} sx={{ color: '#ffc107', fontSize: 20 }} />
-                    ))}
-                  </Box>
-                  
-                  <Typography variant="body1" sx={{ fontStyle: 'italic', lineHeight: 1.6 }}>
-                    "{testimonial.content}"
-                  </Typography>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </Box>
 
       {/* Call to Action Section */}
       <Box

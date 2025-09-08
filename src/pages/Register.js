@@ -122,11 +122,11 @@ function Register() {
         >
           <img
             src="/logo.png"
-            alt="Waste Patrol"
+            alt="Moyla KothAi"
             style={{ height: 60, marginBottom: 16 }}
           />
           <Typography component="h1" variant="h4" sx={{ mb: 1, fontWeight: 600 }}>
-            Join Waste Patrol
+            Join Moyla KothAi
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
             Create your account to start reporting waste issues
@@ -215,7 +215,7 @@ function Register() {
                     disabled={loading}
                   >
                     <MenuItem value="citizen">Citizen</MenuItem>
-                    <MenuItem value="authority">Authority</MenuItem>
+                    {/* <MenuItem value="authority">Authority</MenuItem> */}
                   </Select>
                 </FormControl>
               </Grid>

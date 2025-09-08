@@ -358,7 +358,7 @@ function ReportDetails() {
                     <Grid item xs={12} sm={6}>
                       <Paper sx={{ p: 1 }}>
                         <img
-                          src={`http://localhost:8000/processed/${report.processedImage.filename}`}
+                          src={`${process.env.REACT_APP_API_BASE_URL}/processed/${report.processedImage.filename}`}
                           alt="AI processed waste"
                           style={{
                             width: '100%',

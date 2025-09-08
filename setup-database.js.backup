@@ -11,7 +11,7 @@
  * 
  * Prerequisites:
  *   - PostgreSQL must be installed and running
- *   - moyla_user user must have CREATE DATABASE privileges
+ *   - postgres user must have CREATE DATABASE privileges
  *   - .env file must be configured in backend directory
  */
 
@@ -61,8 +61,8 @@ exec(`node "${setupScript}"`, { cwd: process.cwd() }, (error, stdout, stderr) =>
     console.log('🔧 Troubleshooting:');
     console.log('1. Make sure PostgreSQL is installed and running');
     console.log('2. Check your backend/.env file configuration');
-    console.log('3. Ensure the moyla_user user has proper permissions');
-    console.log('4. Try running: psql -U moyla_user -c "CREATE DATABASE moyla_kothai;"');
+    console.log('3. Ensure the postgres user has proper permissions');
+    console.log('4. Try running: psql -U postgres -c "CREATE DATABASE waste_patrol;"');
     process.exit(1);
   }
   

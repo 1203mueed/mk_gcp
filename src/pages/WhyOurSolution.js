@@ -19,8 +19,7 @@ import {
   Public,
   Recycling,
   TrendingUp,
-  CheckCircle,
-  Star
+  CheckCircle
 } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
@@ -92,23 +91,15 @@ function WhyOurSolution() {
       title: "Easy Integration",
       description: "Seamlessly integrates with existing municipal systems and workflows",
       icon: <CheckCircle sx={{ color: '#48bc19' }} />
+    },
+    {
+      title: "Enhanced Transparency",
+      description: "Increases transparency between citizens and authority, improving accountability throughout the waste management process",
+      icon: <CheckCircle sx={{ color: '#48bc19' }} />
     }
   ];
 
-  const testimonials = [
-    {
-      name: "Dhaka City Corporation",
-      role: "Municipal Authority",
-      content: "Moyla KothAI has revolutionized our waste management operations. We've seen a 60% improvement in response times.",
-      rating: 5
-    },
-    {
-      name: "Chittagong Port Authority",
-      role: "Port Management",
-      content: "The AI-powered detection system has helped us maintain cleaner port areas and improve environmental compliance.",
-      rating: 5
-    }
-  ];
+  // Removed testimonials array as it's no longer needed
 
   return (
     <Box>
@@ -359,22 +350,22 @@ function WhyOurSolution() {
         <Grid container spacing={4}>
           {advantages.map((advantage, index) => (
             <Grid item xs={12} md={6} key={index}>
-              <Box sx={{ display: 'flex', alignItems: 'flex-start', p: 2 }}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', p: 2 }}>
                 <Avatar
                   sx={{
                     bgcolor: alpha('#48bc19', 0.1),
-                    mr: 2,
+                    mb: 2,
                     width: 48,
                     height: 48
                   }}
                 >
                   {advantage.icon}
                 </Avatar>
-                <Box>
+                <Box sx={{ textAlign: 'center' }}>
                   <Typography variant="h6" component="h3" gutterBottom sx={{ fontWeight: 600 }}>
                     {advantage.title}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" color="text.secondary" sx={advantage.title === "Enhanced Transparency" ? { textAlign: 'center', maxWidth: '400px', mx: 'auto' } : {}}>
                     {advantage.description}
                   </Typography>
                 </Box>
@@ -384,129 +375,7 @@ function WhyOurSolution() {
         </Grid>
       </Container>
 
-      {/* Testimonials Section */}
-      <Box
-        sx={{
-          bgcolor: alpha('#09418c', 0.05),
-          py: { xs: 8, md: 12 }
-        }}
-      >
-        <Container maxWidth="lg">
-          <Typography
-            variant="h3"
-            component="h2"
-            textAlign="center"
-            gutterBottom
-            sx={{ fontWeight: 600, mb: 2, color: '#09418c' }}
-          >
-            Trusted by Municipal Authorities
-          </Typography>
-          <Typography
-            variant="h6"
-            textAlign="center"
-            color="text.secondary"
-            paragraph
-            sx={{ mb: 6, maxWidth: '600px', mx: 'auto' }}
-          >
-            Leading cities across Bangladesh are already experiencing the benefits 
-            of our AI-powered waste management solution.
-          </Typography>
-
-          <Grid container spacing={4}>
-            {testimonials.map((testimonial, index) => (
-              <Grid item xs={12} md={6} key={index}>
-                <Card
-                  sx={{
-                    height: '100%',
-                    p: 3,
-                    transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
-                    '&:hover': {
-                      transform: 'translateY(-4px)',
-                      boxShadow: theme.shadows[8]
-                    }
-                  }}
-                >
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} sx={{ color: '#ffc107', fontSize: 20 }} />
-                    ))}
-                  </Box>
-                  <Typography variant="body1" paragraph sx={{ fontStyle: 'italic', mb: 2 }}>
-                    "{testimonial.content}"
-                  </Typography>
-                  <Box>
-                    <Typography variant="h6" sx={{ fontWeight: 600, color: '#09418c' }}>
-                      {testimonial.name}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {testimonial.role}
-                    </Typography>
-                  </Box>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </Box>
-
-      {/* Call to Action Section */}
-      <Container maxWidth="md" sx={{ py: { xs: 8, md: 12 }, textAlign: 'center' }}>
-        <Typography
-          variant="h4"
-          component="h2"
-          gutterBottom
-          sx={{ fontWeight: 600, mb: 2, color: '#09418c' }}
-        >
-          Ready to Transform Your City's Waste Management?
-        </Typography>
-        <Typography
-          variant="h6"
-          color="text.secondary"
-          paragraph
-          sx={{ mb: 4 }}
-        >
-          Join the smart waste management revolution. Experience the power of AI-driven 
-          solutions that make cities cleaner and more efficient.
-        </Typography>
-        <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Button
-            component={Link}
-            to="/register"
-            variant="contained"
-            size="large"
-            sx={{
-              px: 4,
-              py: 1.5,
-              fontSize: '1.1rem',
-              backgroundColor: '#48bc19',
-              '&:hover': {
-                backgroundColor: '#3a9a15',
-              }
-            }}
-          >
-            Start Your Journey
-          </Button>
-          <Button
-            component={Link}
-            to="/"
-            variant="outlined"
-            size="large"
-            sx={{
-              px: 4,
-              py: 1.5,
-              fontSize: '1.1rem',
-              borderColor: '#09418c',
-              color: '#09418c',
-              '&:hover': {
-                borderColor: '#09418c',
-                backgroundColor: alpha('#09418c', 0.1),
-              }
-            }}
-          >
-            Learn More
-          </Button>
-        </Box>
-      </Container>
+      {/* End of Advantages Section */}
     </Box>
   );
 }

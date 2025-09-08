@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
-import axios from 'axios';
+import api from '../config/api';
 import toast from 'react-hot-toast';
 
 // Initial state
@@ -15,6 +15,9 @@ const ActionTypes = {
   LOGIN_START: 'LOGIN_START',
   LOGIN_SUCCESS: 'LOGIN_SUCCESS',
   LOGIN_FAILURE: 'LOGIN_FAILURE',
+  REGISTER_START: 'REGISTER_START',
+  REGISTER_SUCCESS: 'REGISTER_SUCCESS',
+  REGISTER_FAILURE: 'REGISTER_FAILURE',
   LOGOUT: 'LOGOUT',
   SET_LOADING: 'SET_LOADING',
   CLEAR_ERROR: 'CLEAR_ERROR'
@@ -24,12 +27,14 @@ const ActionTypes = {
 function authReducer(state, action) {
   switch (action.type) {
     case ActionTypes.LOGIN_START:
+    case ActionTypes.REGISTER_START:
       return {
         ...state,
         loading: true,
         error: null
       };
     case ActionTypes.LOGIN_SUCCESS:
+    case ActionTypes.REGISTER_SUCCESS:
       return {
         ...state,
         user: action.payload.user,
@@ -38,6 +43,7 @@ function authReducer(state, action) {
         error: null
       };
     case ActionTypes.LOGIN_FAILURE:
+    case ActionTypes.REGISTER_FAILURE:
       return {
         ...state,
         user: null,
@@ -75,26 +81,22 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  // Set up axios interceptor for authentication
+  // Set up authentication
   useEffect(() => {
     // Logout function
     const logout = (showMessage = true) => {
       // Remove token from localStorage
       localStorage.removeItem('waste_patrol_token');
-      
-      // Remove authorization header
-      delete axios.defaults.headers.common['Authorization'];
-
       dispatch({ type: ActionTypes.LOGOUT });
       if (showMessage) {
-        toast.success('Logged out successfully', { duration: 1500 }); // Reduced duration to 1.5 seconds
+        toast.success('Logged out successfully', { duration: 1500 });
       }
     };
 
     // Verify token validity
     const verifyToken = async () => {
       try {
-        const response = await axios.get('/api/auth/profile');
+        const response = await api.get('/api/auth/profile');
         dispatch({
           type: ActionTypes.LOGIN_SUCCESS,
           payload: { user: response.data.user }
@@ -107,116 +109,91 @@ export function AuthProvider({ children }) {
 
     const token = localStorage.getItem('waste_patrol_token');
     if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       // Verify token validity
       verifyToken();
     } else {
       dispatch({ type: ActionTypes.SET_LOADING, payload: false });
     }
-
-    // Add response interceptor for handling token expiration
-    const interceptor = axios.interceptors.response.use(
-      (response) => response,
-      (error) => {
-        if (error.response?.status === 401) {
-          logout(false); // Don't show logout message for 401 errors
-          toast.error('Session expired. Please login again.');
-        }
-        return Promise.reject(error);
-      }
-    );
-
-    return () => axios.interceptors.response.eject(interceptor);
-  }, []);
-
-  // Logout function (for use outside useEffect)
-  const logout = useCallback((showMessage = true) => {
-    // Remove token from localStorage
-    localStorage.removeItem('waste_patrol_token');
-    
-    // Remove authorization header
-    delete axios.defaults.headers.common['Authorization'];
-
-    dispatch({ type: ActionTypes.LOGOUT });
-    if (showMessage) {
-      toast.success('Logged out successfully', { duration: 1500 }); // Reduced duration to 1.5 seconds
-    }
   }, []);
 
   // Login function
-  const login = async (email, password) => {
+  const login = useCallback(async (email, password) => {
+    dispatch({ type: ActionTypes.LOGIN_START });
+    
     try {
-      dispatch({ type: ActionTypes.LOGIN_START });
-
-      const response = await axios.post('/api/auth/login', {
+      const response = await api.post('/api/auth/login', {
         email,
         password
       });
 
       const { token, user } = response.data;
-
+      
       // Store token in localStorage
       localStorage.setItem('waste_patrol_token', token);
       
-      // Set default authorization header
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
       dispatch({
         type: ActionTypes.LOGIN_SUCCESS,
         payload: { user }
       });
-
-      toast.success('Login successful!');
+      
+      toast.success('Login successful!', { duration: 2000 });
       return { success: true };
     } catch (error) {
-      const errorMessage = error.response?.data?.message || 'Login failed';
+      const errorMessage = error.response?.data?.message || 'Login failed. Please try again.';
       dispatch({
         type: ActionTypes.LOGIN_FAILURE,
         payload: errorMessage
       });
-      toast.error(errorMessage);
+      
+      toast.error(errorMessage, { duration: 3000 });
       return { success: false, error: errorMessage };
     }
-  };
+  }, []);
 
   // Register function
-  const register = async (userData) => {
+  const register = useCallback(async (userData) => {
+    dispatch({ type: ActionTypes.REGISTER_START });
+    
     try {
-      dispatch({ type: ActionTypes.LOGIN_START });
-
-      const response = await axios.post('/api/auth/register', userData);
+      const response = await api.post('/api/auth/register', userData);
 
       const { token, user } = response.data;
-
+      
       // Store token in localStorage
       localStorage.setItem('waste_patrol_token', token);
       
-      // Set default authorization header
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
       dispatch({
-        type: ActionTypes.LOGIN_SUCCESS,
+        type: ActionTypes.REGISTER_SUCCESS,
         payload: { user }
       });
-
-      toast.success('Registration successful!');
+      
+      toast.success('Registration successful!', { duration: 2000 });
       return { success: true };
     } catch (error) {
-      const errorMessage = error.response?.data?.message || 'Registration failed';
+      const errorMessage = error.response?.data?.message || 'Registration failed. Please try again.';
       dispatch({
-        type: ActionTypes.LOGIN_FAILURE,
+        type: ActionTypes.REGISTER_FAILURE,
         payload: errorMessage
       });
-      toast.error(errorMessage);
+      
+      toast.error(errorMessage, { duration: 3000 });
       return { success: false, error: errorMessage };
     }
-  };
+  }, []);
 
+  // Logout function
+  const logout = useCallback((showMessage = true) => {
+    localStorage.removeItem('waste_patrol_token');
+    dispatch({ type: ActionTypes.LOGOUT });
+    if (showMessage) {
+      toast.success('Logged out successfully', { duration: 1500 });
+    }
+  }, []);
 
   // Clear error function
-  const clearError = () => {
+  const clearError = useCallback(() => {
     dispatch({ type: ActionTypes.CLEAR_ERROR });
-  };
+  }, []);
 
   const value = {
     ...state,
@@ -236,7 +213,7 @@ export function AuthProvider({ children }) {
 // Custom hook to use auth context
 export function useAuth() {
   const context = useContext(AuthContext);
-  if (!context) {
+  if (context === undefined) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
